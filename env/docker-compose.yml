@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  postgres:
+    container_name: "contacts-db"
+    image: "contacts/postgres:14.2"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=contacts
+    networks:
+      - shared-network
+
+networks:
+  shared-network:

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/datatables.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+    <script>
+        var table;
+        $(document).ready(function() {
+            table = $('#contacts').DataTable();
+        });
+    </script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div th:insert="menu :: menu">...</div>
+<table id="contacts">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>Страна</th>
+        <th>Город</th>
+        <th>Организация</th>
+        <th>Должность</th>
+        <th>Контакты</th>
+        <th>Тэги</th>
+        <th>Коммент.</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${records}" th:id="'record' + ${record.id}">
+        <td th:text="${record.id}">1</td>
+        <td th:text="${record.fullName}">Киркоров Филипп Бедросович</td>
+        <td th:text="${record.country}">Россия</td>
+        <td th:text="${record.city}">Москва</td>
+        <td th:text="${record.organization}">Bedrosovich records</td>
+        <td th:text="${record.occupation}">Артист</td>
+        <td>
+            <div th:each="contact : ${record.contacts}"
+                 th:text="${contact.type} + ': ' + ${contact.value} + ' ' + ${contact.comment}">Телефон: 7(903)999-88-66
+                рабочий
+            </div>
+        </td>
+        <td th:text="${record.tags}">#РОССИЯ #ПЕВЕЦ #ПРОДАКШЕН</td>
+        <td th:text="${record.comment}">Комментарий</td>
+        <td>
+            <a th:href="@{/record/{recordId}(recordId=${record.id})}" method="get">Просмотр</a>
+            <a th:href="@{#}" th:onclick="'deleteRecord(' + ${record.id} + '); return false;'">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

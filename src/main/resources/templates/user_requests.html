@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/datatables.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+    <script>
+        var table;
+        $(document).ready(function () {
+            table = $('#user-requests').DataTable();
+        });
+    </script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div th:insert="menu :: menu">...</div>
+<table id="user-requests">
+    <thead>
+    <tr>
+        <th>ФИО контакта</th>
+        <th>Тип правки</th>
+        <th>Дата создания</th>
+        <th>Статус</th>
+        <th>Комментарий модератора</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request : ${user_requests}" th:id="'request' + ${request.id}">
+        <td th:text="${request.getContactName()}">Киркоров Филипп Бедросович</td>
+        <td th:text="${request.getChangeType()}">Изменение</td>
+        <td th:text="${request.getCreatedAt()}">2022-09-11 14:45:00</td>
+        <td th:text="${request.getStatus()}">Ожидает</td>
+        <td th:text="${request.getComment()}">Комментарий</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

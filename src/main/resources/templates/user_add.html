@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div id="menu">
+    <a href="/">Контакты</a> |
+    <a href="/record/add">Добавить контакт</a>
+    <th:block th:if="${user.getRole() == 'MODERATOR'}"> | <a href="/requests">Модерация</a></th:block>
+    <th:block th:if="${user.getRole() == 'ADMIN'}"> | <a href="/users">Пользователи</a> |
+        <a href="/user/add">Добавить пользователя</a>
+    </th:block>
+</div>
+<div id="edit-user-form">
+    <div>
+        <div>
+            <label for="edit-user-username">Имя пользователя<span class="required-field">*</span></label>
+            <input type="text" id="edit-user-username" maxlength="255" required="required">
+        </div>
+        <div>
+            <label for="edit-user-email">Почта<span class="required-field">*</span></label>
+            <input type="text" id="edit-user-email" maxlength="255">
+        </div>
+        <div>
+            <label for="edit-user-role">Роль</label>
+            <select id="edit-user-role">
+                <option th:each="role : ${userRoles}" th:value="${role.name()}" th:text="${role.value}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="edit-user-password">Пароль</label>
+            <input type="password" id="edit-user-password" maxlength="64">
+        </div>
+        <div>
+            <label for="edit-user-password-repeat">Повторите пароль</label>
+            <input type="password" id="edit-user-password-repeat" maxlength="64">
+        </div>
+    </div>
+    <button id="submit-user-btn" onclick="submitUser();return false;">Добавить</button>
+</div>
+</body>
+</html>

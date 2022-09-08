@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div th:insert="menu :: menu">...</div>
+<div id="request-details-type">
+    Тип правки: <span th:text="${request.type.value}"></span>
+</div>
+<table id="request-details">
+    <thead>
+    <tr>
+        <td></td>
+        <td>Предыдущее значение</td>
+        <td>Новое значение</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="change : ${request.changes}" th:class="${change.isChanged() && request.isEdit()}
+            ? 'changed-field' : ''">
+        <td th:text="${change.fieldName}"></td>
+        <td th:text="${change.previousValue}"></td>
+        <td th:text="${change.newValue}"></td>
+    </tr>
+    </tbody>
+</table>
+<div id="request-decline-dialog" title="Комментарий">
+    <textarea id="request-decline-comment" placeholder="Укажите причину отклонения (не обязательно)" ></textarea>
+</div>
+<div id="request-details-controlls">
+    <button id="request-details-approve-btn"
+            th:onclick="'acceptRequest(' + ${request.id} + ');return false'">Применить
+    </button>
+    <button id="request-details-decline-btn"
+            th:onclick="'declineRequest(' + ${request.id} + ', true);return false'">Отклонить
+    </button>
+</div>
+</body>
+</html>

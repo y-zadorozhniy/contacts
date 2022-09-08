@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/datatables.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+    <script>
+        var table;
+        $(document).ready(function () {
+            table = $('#change-requests').DataTable();
+        });
+    </script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div th:insert="menu :: menu">...</div>
+<div id="request-decline-dialog" title="Комментарий">
+    <textarea id="request-decline-comment" placeholder="Укажите причину отклонения (не обязательно)"></textarea>
+</div>
+<table id="change-requests">
+    <thead>
+    <tr>
+        <th>ID контакта</th>
+        <th>ФИО контакта</th>
+        <th>Тип правки</th>
+        <th>Отправитель</th>
+        <th>Дата создания</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request : ${requests}" th:id="'request' + ${request.id}">
+        <td th:text="${request.recordId}">1</td>
+        <td th:text="${request.contactName}">Киркоров Филипп Бедросович</td>
+        <td th:text="${request.getChangeType()}">Изменение</td>
+        <td th:text="${request.userName}">petrov_an</td>
+        <td th:text="${request.createdAt}">2022-09-11 14:45:00</td>
+        <td>
+            <a th:href="@{/request/{requestId}(requestId=${request.id})}" method="get">Просмотр</a>
+            <a th:href="@{#}" th:onclick="'declineRequest(' + ${request.id} + '); return false;'">Отклонить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

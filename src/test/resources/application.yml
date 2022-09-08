@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+  test:
+    database:
+      replace: none
+  liquibase:
+    change-log: classpath:liquibase/changelog.xml
+    contexts: test
+    liquibase-schema: public
+
+logging:
+   level:
+     ROOT: ERROR
+     liquibase: INFO

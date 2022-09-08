@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/datatables.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+    <script>
+        var table;
+        $(document).ready(function () {
+            table = $('#users').DataTable();
+        });
+    </script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div id="menu">
+    <a href="/">Контакты</a> |
+    <a href="/record/add">Добавить контакт</a>
+    <th:block th:if="${user.getRole() == 'MODERATOR'}"> | <a href="/requests">Модерация</a></th:block>
+    <th:block th:if="${user.getRole() == 'ADMIN'}"> | <a href="/users">Пользователи</a> |
+        <a href="/user/add">Добавить пользователя</a>
+    </th:block>
+</div>
+<table id="users">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя пользователя</th>
+        <th>Почта</th>
+        <th>Роль</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}" th:id="'user' + ${user.id}">
+        <td th:text="${user.id}">1</td>
+        <td th:text="${user.username}">moderator</td>
+        <td th:text="${user.email}">moderator@domain.dev</td>
+        <td th:text="${user.getRole()}">MODERATOR</td>
+        <td>
+            <a th:href="@{/user/{userId}(userId=${user.id})}" method="get">Просмотр</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

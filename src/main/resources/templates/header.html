@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<nav class="header-content" th:fragment="header">
+    <div class="title-container">
+        <a class="title-name" href="/">contacts</a>
+    </div>
+    <div class="navbar-container">
+        <span class="navbar-username" th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
+        <form class="navbar-logout" th:action="@{/logout}" method="POST">
+            <input class="logout-img" type="image" src="/img/logout.svg" alt="Submit"/>
+        </form>
+    </div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,179 @@
+body {
+    font-family: Verdana;
+}
+
+table {
+    text-decoration: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+table th {
+    font-weight: normal;
+    font-size: 12pt;
+    color: #ffffff;
+    background-color: #354251;
+}
+
+table td {
+    font-size: 10pt;
+    color: #354251;
+}
+
+table tr:last-child {
+    width: 100px;
+}
+
+table td, table th {
+    padding: 10px 5px;
+    line-height: 14px;
+    vertical-align: middle;
+    border: 1px solid #354251;
+    max-width: 249px;
+    word-break: break-word;
+}
+
+table tr:hover td {
+    color: #607D8B;
+    cursor: default;
+}
+
+#menu a {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 11pt;
+    color: #0723c7;
+}
+
+.row {
+    padding: 3px;
+}
+
+.row label {
+    width: 100px;
+    display: inline-block;
+}
+
+h1 {
+    font-size: 16px;
+}
+
+form {
+    padding: 0 30px
+}
+
+button {
+    font-size: 10pt;
+    margin: 10px 0px 0px 0px;
+    background-color: #0d5fb7;
+    color: white;
+    padding: 8pt 12pt;
+    border: none;
+}
+
+button:hover {
+    background-color: #0952c3;
+    cursor: pointer;
+}
+
+#delete-user-btn {
+    background-color: #f44336;
+}
+
+input, select, textarea {
+    border: none;
+    padding: 6px;
+    background-color: #f4f6f9;
+}
+
+label {
+    display: block;
+    font-size: 9pt;
+    color: #494949;
+    margin: 2em 0 0.1em;
+}
+
+#edit-contact-contact-add-link, #edit-contact-contact-remove-link {
+    display: inline-block;
+    margin: 0.6em 0 0 0.1em;
+    font-size: 8pt;
+    color: #666565;
+}
+
+.edit-contact-contact {
+    margin-top: 0.5em;
+}
+
+#edit-contact-tags {
+    height: 65px;
+    width: 305px;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-left: 0;
+}
+
+.title-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title-logo {
+    padding-right: 0;
+    margin: 0;
+}
+
+.title-name {
+    color: #354251;
+    font-size: 13pt;
+    padding-left: 0.3em;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.navbar-username {
+    color: #354251;
+    font-size: 13pt;
+}
+
+.navbar-logout{
+    padding: 0;
+}
+
+.logout-img{
+    background-color:transparent;
+}
+
+#request-decline-dialog {
+    display: none;
+}
+
+#request-decline-comment {
+    resize: none;
+    width: 100%;
+    height: 75px;
+}
+
+#request-details-type span {
+    font-weight: bolder;
+    text-transform: lowercase;
+}
+
+#request-details-type {
+    padding: 0.5em;
+}
+
+#request-details tr.changed-field {
+    background-color: #c1ffbb;
+}

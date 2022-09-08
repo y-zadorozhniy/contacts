@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div id="menu" th:fragment="menu">
+  <a href="/">Контакты</a> |
+  <a href="/record/add">Добавить контакт</a>
+  <th:block th:if="${user.getRole() == 'ADMIN' or user.getRole() == 'EDITOR'}"> | <a href="/user/requests">Мои правки</a></th:block>
+  <th:block th:if="${user.getRole() == 'MODERATOR'}"> | <a href="/requests">Модерация</a></th:block>
+  <th:block th:if="${user.getRole() == 'ADMIN'}"> | <a href="/users">Пользователи</a> |
+    <a href="/user/add">Добавить пользователя</a>
+  </th:block>
+</div>
+</body>
+</html>

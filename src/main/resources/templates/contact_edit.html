@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База контактов</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.13.1/jquery-ui.theme.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/notify.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/webjars/jquery-ui/1.13.1/jquery-ui.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header">...</div>
+<div th:insert="menu :: menu">...</div>
+<div id="edit-contact-form">
+    <div>
+        <div>
+            <label for="edit-contact-fullname">Полное имя<span class="required-field">*</span></label>
+            <input th:value="${record.fullName}" type="text" id="edit-contact-fullname" maxlength="255"
+                   required="required" placeholder="Фамилия Имя Отчество">
+        </div>
+        <div>
+            <label for="edit-contact-company">Компания</label>
+            <input th:value="${record.organization}" type="text" id="edit-contact-company" maxlength="64">
+        </div>
+        <div>
+            <label for="edit-contact-occupation">Должность</label>
+            <input th:value="${record.occupation}" type="text" id="edit-contact-occupation" maxlength="64">
+        </div>
+        <div>
+            <label for="edit-contact-country">Страна</label>
+            <input th:value="${record.country}" type="text" id="edit-contact-country" maxlength="64">
+        </div>
+        <div>
+            <label for="edit-contact-city">Город</label>
+            <input th:value="${record.city}" type="text" id="edit-contact-city" maxlength="64">
+        </div>
+    </div>
+    <div>
+        <div id="edit-contact-contacts-fields">
+            <label>Контакты</label>
+            <div class="edit-contact-contact edit-contact-first-contact" th:if="${record.contacts.size()} == 0">
+                <select class="edit-contact-contact-type" onchange="setContactPlaceholder()">
+                    <option th:each="type : ${contactTypes}" th:value="${type.name()}" th:text="${type.value}"></option>
+                </select>
+                <input type="text" class="edit-contact-contact-value" placeholder="Значение">
+                <input type="text" class="edit-contact-contact-comment" placeholder="Комментарий">
+            </div>
+            <div th:each="contact,iterStat : ${record.contacts}"
+                 th:class="${iterStat.first}? 'edit-contact-contact edit-contact-first-contact' : 'edit-contact-contact'"
+                 class="edit-contact-contact">
+                <select class="edit-contact-contact-type" onchange="setContactPlaceholder()">
+                    <option th:each="type : ${contactTypes}" th:value="${type.name()}" th:text="${type.value}"
+                            th:selected="${type.value == contact.type.value}? 'selected'"></option>
+                </select>
+                <input th:value="${contact.value}" type="text" class="edit-contact-contact-value" placeholder="Значение">
+                <input th:value="${contact.comment}" type="text" class="edit-contact-contact-comment" placeholder="Комментарий">
+            </div>
+            <div id="edit-contact-contacts-controlls">
+                <a href="#" id="edit-contact-contact-add-link" onclick="addContact();return false;">Добавить</a>
+                <a href="#" id="edit-contact-contact-remove-link" onclick="removeLastContact();return false;">
+                    Убрать последний</a>
+            </div>
+        </div>
+        <div>
+            <label for="edit-contact-tags">Тэги</label>
+            <textarea th:text="${record.tags}" id="edit-contact-tags" name="tags"
+                      placeholder="Каждый тег с новой строки.&#10;Например:&#10;Тег1&#10;Тег2&#10;Тег3"></textarea>
+        </div>
+        <div>
+            <label for="edit-contact-comment">Комментарий</label>
+            <textarea th:text="${record.comment}" id="edit-contact-comment" name="comment"></textarea>
+        </div>
+    </div>
+    <input type="hidden" id="edit-contact-record-id" th:value="${recordId}">
+    <button id="submit-contact-btn"
+            th:text="${user.getRole() == 'MODERATOR' ? 'Сохранить' : 'Отправить запрос'}"
+            onclick="submitContact();return false">Сохранить
+    </button>
+</div>
+</body>
+</html>

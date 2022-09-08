@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="sql/V1_ddl_zadorozhniyya_MC-17-initdb.sql" relativeToChangelogFile="true"/>
+    <include file="sql/V2_ddl_zadorozhniyya_MC-13-change-requests-list.sql" relativeToChangelogFile="true"/>
+    <include file="sql/V3_ddl_zadorozhniyya_MC-12-add-user.sql" relativeToChangelogFile="true"/>
+    <include file="sql/V4_ddl_zadorozhniyya_MC-34-comment-field.sql" relativeToChangelogFile="true"/>
+    <include file="sql/V5_ddl_zadorozhniyya_MC-35-tags-unique.sql" relativeToChangelogFile="true"/>
+    <include file="sql/V6_ddl_zadorozhniyya_MC-25-add-request-comment.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>
